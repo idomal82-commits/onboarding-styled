@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>COHEN & PARTNERS – Onboarding</title>
+<link href="https://cdn.jsdelivr.net/npm/survey-core@1.11.8/modern.min.css" rel="stylesheet" />
+<style>
+:root { --bg:#0b1a44; --accent:#d98900; --text:#f7f7f7; }
+body { margin:0; font-family:"Rubik","Heebo","Alef",sans-serif; background:#fff; color:#0f172a; }
+header { background:var(--bg); color:var(--text); text-align:center; padding:50px 20px; }
+header img { width:180px; margin-bottom:16px; }
+header h1 { margin:5px 0; font-size:24px; }
+.btn { display:inline-block; padding:10px 20px; background:var(--accent); color:#111; border-radius:999px; text-decoration:none; font-weight:700; }
+main { max-width:980px; margin:30px auto; padding:20px; }
+.card { background:#fff; border-radius:18px; padding:18px; box-shadow:0 8px 20px rgba(0,0,0,.05); }
+.sv-main .sv-container { direction:rtl; text-align:right; }
+.sv-title, .sv-page__title { text-align:right; }
+footer { text-align:center; padding:20px; border-top:1px solid #ddd; font-size:12px; color:#777; }
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/logo.png" alt="logo" />
+  <h1>COHEN & PARTNERS</h1>
+  <p>טופס הצטרפות למשרד. מלא את הפרטים הבאים ונחזור אליך בהקדם.</p>
+  <a href="#form" class="btn">התחל תהליך הצטרפות</a>
+</header>
+
+<main id="form">
+  <div class="card"><div id="surveyElement"></div></div>
+  <div id="surveyResult"></div>
+</main>
+
+<footer>© 2025 COHEN & PARTNERS · כל הזכויות שמורות</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/survey-core@1.11.8/survey.core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/survey-jquery@1.11.8/survey.jquery.min.js"></script>
+
+<script>
+Survey.StylesManager.applyTheme("modern");
+
+const json = {
+  locale: "he",
+  showProgressBar: "top",
+  progressBarType: "pages",
+  pages: [{
+    name: "page1",
+    title: "פרטי לקוח",
+    elements: [
+      { type: "text", name: "fullname", title: "שם מלא", isRequired: true },
+      { type: "text", name: "email", title: "דוא"ל", inputType: "email", isRequired: true },
+      { type: "text", name: "phone", title: "טלפון נייד", inputType: "tel", isRequired: true },
+      { type: "comment", name: "notes", title: "הערות נוספות" }
+    ]
+  }]
+};
+
+const survey = new Survey.Model(json);
+survey.onComplete.add(async function(sender) {
+  const data = sender.data;
+  await fetch("https://formsubmit.co/ajax/ido@isc-finance.co", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({ _subject: "New Onboarding – COHEN & PARTNERS", message: JSON.stringify(data) })
+  });
+  document.getElementById("surveyResult").innerHTML = "<h3>✅ הטופס נשלח בהצלחה!</h3>";
+});
+
+$(function(){ $("#surveyElement").Survey({ model: survey }); });
+</script>
+</body>
+</html>
