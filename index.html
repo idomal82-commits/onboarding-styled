@@ -1,74 +1,969 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>COHEN & PARTNERS – Onboarding</title>
-<link href="https://cdn.jsdelivr.net/npm/survey-core@1.11.8/modern.min.css" rel="stylesheet" />
-<style>
-:root { --bg:#0b1a44; --accent:#d98900; --text:#f7f7f7; }
-body { margin:0; font-family:"Rubik","Heebo","Alef",sans-serif; background:#fff; color:#0f172a; }
-header { background:var(--bg); color:var(--text); text-align:center; padding:50px 20px; }
-header img { width:180px; margin-bottom:16px; }
-header h1 { margin:5px 0; font-size:24px; }
-.btn { display:inline-block; padding:10px 20px; background:var(--accent); color:#111; border-radius:999px; text-decoration:none; font-weight:700; }
-main { max-width:980px; margin:30px auto; padding:20px; }
-.card { background:#fff; border-radius:18px; padding:18px; box-shadow:0 8px 20px rgba(0,0,0,.05); }
-.sv-main .sv-container { direction:rtl; text-align:right; }
-.sv-title, .sv-page__title { text-align:right; }
-footer { text-align:center; padding:20px; border-top:1px solid #ddd; font-size:12px; color:#777; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COHEN & PARTNERS – Onboarding</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/survey-core@1.11.8/modern.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b1a44;
+      --accent: #d98900;
+      --text: #f7f7f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Rubik","Heebo","Alef","Arial","Helvetica",sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    header.hero {
+      background: var(--bg);
+      color: var(--text);
+      padding: 48px 20px 56px;
+      text-align: center;
+    }
+    header.hero .inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    header.hero img.logo {
+      width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto 18px;
+      object-fit: contain;
+    }
+    header.hero h1 {
+      margin: 4px 0 4px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      font-size: 24px;
+    }
+    header.hero p.sub {
+      margin: 0 auto;
+      opacity: .9;
+      max-width: 760px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .cta { margin-top: 22px; }
+    .btn {
+      display:inline-block;
+      padding: 11px 22px;
+      background: var(--accent);
+      color:#111827;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 8px 26px rgba(217,137,0,.28);
+      transition: all .16s ease;
+      font-size:14px;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow:0 10px 34px rgba(217,137,0,.36);
+    }
+    .note {
+      font-size: 12px;
+      opacity:.82;
+      margin-top: 6px;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 26px auto 40px;
+      padding: 0 16px;
+    }
+    .card {
+      background:#ffffff;
+      border-radius: 18px;
+      padding: 18px 14px 22px;
+      box-shadow:0 10px 40px rgba(15,23,42,.06);
+      border:1px solid #e5e7eb;
+    }
+
+    .sv-main .sv-container { direction: rtl; text-align: right; }
+    .sv-title, .sv-page__title, .sv-completedpage { text-align: right; }
+    .sv-body__page { max-width: 980px; margin: 0 auto; }
+    .sv-question__required-text { color: var(--accent); }
+
+    #errbox {
+      max-width:980px;
+      margin:16px auto;
+      white-space:pre-wrap;
+      color:#900;
+      background:#fee;
+      border:1px solid #e66;
+      padding:8px;
+      border-radius:8px;
+      display:none;
+      font-size:12px;
+    }
+
+    #surveyResult {
+      max-width:980px;
+      margin:16px auto 0;
+      font-size:11px;
+      color:#6b7280;
+      white-space:pre-wrap;
+    }
+
+    footer {
+      border-top:1px solid #e5e7eb;
+      padding: 14px 16px 18px;
+      text-align:center;
+      color:#6b7280;
+      font-size: 11px;
+    }
+    .pill {
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      background:#f9fafb;
+      color:#111827;
+      border:1px solid #e5e7eb;
+      margin:4px 3px;
+      font-size:10px;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <img src="assets/logo.png" alt="logo" />
-  <h1>COHEN & PARTNERS</h1>
-  <p>טופס הצטרפות למשרד. מלא את הפרטים הבאים ונחזור אליך בהקדם.</p>
-  <a href="#form" class="btn">התחל תהליך הצטרפות</a>
-</header>
 
-<main id="form">
-  <div class="card"><div id="surveyElement"></div></div>
-  <div id="surveyResult"></div>
-</main>
+  <header class="hero">
+    <div class="inner">
+      <!-- ודא שיש לך assets/logo.png בריפו -->
+      <img class="logo" src="assets/logo.png" alt="COHEN & PARTNERS" />
+      <h1>COHEN &amp; PARTNERS</h1>
+      <p class="sub">
+        טופס הצטרפות מקוון למשרד. כמה דקות של מילוי מסודר,
+        ואנחנו חוזרים אליך עם תהליך מותאם לסטנדרט של Strategic Accounting &amp; Business Advisory.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#form">התחל תהליך הצטרפות</a>
+        <div class="note">המידע חסוי, מאובטח, ומשמש לצורך פתיחת תיק וטיפול מקצועי בלבד.</div>
+      </div>
+    </div>
+  </header>
 
-<footer>© 2025 COHEN & PARTNERS · כל הזכויות שמורות</footer>
+  <main id="form">
+    <div id="errbox"></div>
+    <div class="card">
+      <div id="surveyElement"></div>
+    </div>
+    <div id="surveyResult"></div>
+  </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/survey-core@1.11.8/survey.core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/survey-jquery@1.11.8/survey.jquery.min.js"></script>
+  <footer>
+    © 2025 COHEN &amp; PARTNERS · כל הזכויות שמורות ·
+    <span class="pill">Confidential</span><span class="pill">Secure</span>
+  </footer>
 
-<script>
-Survey.StylesManager.applyTheme("modern");
+  <script>
+    window.onerror = function (msg, src, line, col) {
+      var box = document.getElementById('errbox');
+      if (!box) return;
+      box.style.display = 'block';
+      box.textContent = "שגיאה: " + msg +
+        "\\nבקובץ: " + src +
+        "\\nשורה: " + line + ":" + col;
+      return false;
+    };
+  </script>
 
-const json = {
-  locale: "he",
-  showProgressBar: "top",
-  progressBarType: "pages",
-  pages: [{
-    name: "page1",
-    title: "פרטי לקוח",
-    elements: [
-      { type: "text", name: "fullname", title: "שם מלא", isRequired: true },
-      { type: "text", name: "email", title: "דוא"ל", inputType: "email", isRequired: true },
-      { type: "text", name: "phone", title: "טלפון נייד", inputType: "tel", isRequired: true },
-      { type: "comment", name: "notes", title: "הערות נוספות" }
-    ]
-  }]
-};
+  <!-- ספריות -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/survey-core@1.11.8/survey.core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/survey-jquery@1.11.8/survey.jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/surveyjs-widgets@1.11.8/surveyjs-widgets.min.js"></script>
 
-const survey = new Survey.Model(json);
-survey.onComplete.add(async function(sender) {
-  const data = sender.data;
-  await fetch("https://formsubmit.co/ajax/ido@isc-finance.co", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Accept": "application/json" },
-    body: JSON.stringify({ _subject: "New Onboarding – COHEN & PARTNERS", message: JSON.stringify(data) })
-  });
-  document.getElementById("surveyResult").innerHTML = "<h3>✅ הטופס נשלח בהצלחה!</h3>";
-});
+  <script>
+    // חתימה
+    if (window["surveyjs-widgets"] && window["surveyjs-widgets"].signaturepad) {
+      window["surveyjs-widgets"].signaturepad(Survey);
+    }
+    Survey.StylesManager.applyTheme("modern");
 
-$(function(){ $("#surveyElement").Survey({ model: survey }); });
-</script>
+    // *** כאן כל הטופס המלא ***
+    var json = {
+      locale: "he",
+      showProgressBar: "top",
+      progressBarType: "pages",
+      widthMode: "static",
+      width: "980",
+      completedHtml:
+        "<h3>הטופס נקלט בהצלחה ✅</h3><div>תודה, פרטיך התקבלו במשרד COHEN &amp; PARTNERS. נחזור אליך בהקדם.</div>",
+      pagePrevText: "חזרה",
+      pageNextText: "הבא",
+      completeText: "שליחה",
+      requiredText: "*",
+      showQuestionNumbers: "off",
+      pages: [
+
+        {
+          name: "gateway",
+          title: "בחירת מסלול",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "clientType",
+              title: "בחר/י סוג לקוח:",
+              isRequired: true,
+              choices: [
+                { value: "A", text: "A – עוסק פטור" },
+                { value: "B", text: "B – עוסק מורשה" },
+                { value: "C", text: "C – חברה בע\"מ" }
+              ]
+            },
+            {
+              type: "radiogroup",
+              name: "companyCSubtype",
+              title: "במסלול חברה בע\"מ – מה סוג הטיפול?",
+              visibleIf: "{clientType} = 'C'",
+              isRequired: true,
+              choices: [
+                { value: "C_EXIST", text: "חברה קיימת (מעבר טיפול למשרד)" },
+                { value: "C_NEW", text: "הקמת חברה חדשה" }
+              ]
+            }
+          ]
+        },
+
+        /* ===================== מסלול A – עוסק פטור ===================== */
+
+        {
+          name: "A1",
+          visibleIf: "{clientType} = 'A'",
+          title: "A1 – פרטי זיהוי לקוח",
+          elements: [
+            { type: "text", name: "A1_fullname", title: "שם מלא", isRequired: true },
+            { type: "text", name: "A1_id", title: "תעודת זהות (9 ספרות)", isRequired: true, inputType: "number" },
+            { type: "text", name: "A1_phone", title: "טלפון נייד", isRequired: true, inputType: "tel" },
+            { type: "text", name: "A1_email", title: "דוא\"ל", isRequired: true, inputType: "email" },
+            { type: "text", name: "A1_address", title: "כתובת מגורים מלאה", isRequired: true }
+          ]
+        },
+        {
+          name: "A2",
+          visibleIf: "{clientType} = 'A'",
+          title: "A2 – פרטי העסק",
+          elements: [
+            { type: "text", name: "A2_business_name", title: "שם העסק (אם קיים)", placeholder: "אם אין – השאר/י ריק" },
+            { type: "text", name: "A2_activity", title: "תיאור קצר של העיסוק", isRequired: true }
+          ]
+        },
+        {
+          name: "A3",
+          visibleIf: "{clientType} = 'A'",
+          title: "A3 – הרשאות ותשלומים",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "A3_payment_mode",
+              title: "איך תרצה/י לשלם?",
+              isRequired: true,
+              choices: [
+                { value: "debit_auth", text: "הרשאה לחיוב חשבון" },
+                { value: "standing_order", text: "הוראת קבע" }
+              ]
+            }
+          ]
+        },
+        {
+          name: "A4",
+          visibleIf: "{clientType} = 'A'",
+          title: "A4 – ייפוי כוח לרשויות",
+          elements: [
+            { type: "boolean", name: "A4_tax_poa", title: "ייפוי כוח למס הכנסה", isRequired: true },
+            { type: "boolean", name: "A4_vat_poa", title: "ייפוי כוח למע\"מ", isRequired: true },
+            { type: "boolean", name: "A4_btl_poa", title: "ייפוי כוח לביטוח לאומי", isRequired: true }
+          ]
+        },
+        {
+          name: "A5",
+          visibleIf: "{clientType} = 'A'",
+          title: "A5 – מסמכים",
+          elements: [
+            {
+              type: "file",
+              name: "A5_id_doc",
+              title: "ת\"ז + ספח (PDF/JPG/PNG)",
+              isRequired: true,
+              acceptedTypes: ".pdf,.jpg,.jpeg,.png",
+              maxSize: 1024 * 1024 * 10,
+              storeDataAsText: true
+            }
+          ]
+        },
+        {
+          name: "A6",
+          visibleIf: "{clientType} = 'A'",
+          title: "A6 – סיכום וחתימה",
+          elements: [
+            {
+              type: "signaturepad",
+              name: "A6_signature",
+              title: "חתימה דיגיטלית",
+              isRequired: true,
+              signatureWidth: 500,
+              signatureHeight: 200
+            },
+            { type: "comment", name: "A6_notes", title: "הערות נוספות (לא חובה)" }
+          ]
+        },
+
+        /* ===================== מסלול B – עוסק מורשה ===================== */
+
+        {
+          name: "B1",
+          visibleIf: "{clientType} = 'B'",
+          title: "B1 – פרטי זיהוי לקוח",
+          elements: [
+            { type: "text", name: "B1_fullname", title: "שם מלא", isRequired: true },
+            { type: "text", name: "B1_id", title: "תעודת זהות (9 ספרות)", isRequired: true, inputType: "number" },
+            { type: "text", name: "B1_phone", title: "טלפון נייד", isRequired: true, inputType: "tel" },
+            { type: "text", name: "B1_email", title: "דוא\"ל", isRequired: true, inputType: "email" },
+            { type: "text", name: "B1_address", title: "כתובת מגורים מלאה", isRequired: true }
+          ]
+        },
+        {
+          name: "B2",
+          visibleIf: "{clientType} = 'B'",
+          title: "B2 – פרטי העסק",
+          elements: [
+            { type: "text", name: "B2_business_name", title: "שם העסק", isRequired: true },
+            { type: "text", name: "B2_activity", title: "תיאור העיסוק", isRequired: true }
+          ]
+        },
+        {
+          name: "B3",
+          visibleIf: "{clientType} = 'B'",
+          title: "B3 – נתונים פיננסיים וחשבון בנק",
+          elements: [
+            { type: "text", name: "B3_turnover_last", title: "מחזור שנתי ממוצע בשנים האחרונות (₪)", inputType: "number" },
+            { type: "text", name: "B3_turnover_expected", title: "מחזור צפוי לשנה הקרובה (₪)", inputType: "number" },
+            { type: "text", name: "B3_bank_name", title: "שם הבנק", isRequired: true },
+            { type: "text", name: "B3_bank_branch", title: "סניף", inputType: "number", isRequired: true },
+            { type: "text", name: "B3_bank_account", title: "מספר חשבון", inputType: "number", isRequired: true }
+          ]
+        },
+        {
+          name: "B4",
+          visibleIf: "{clientType} = 'B'",
+          title: "B4 – מערכת חשבוניות/הנה\"ח",
+          elements: [
+            { type: "text", name: "B4_system", title: "שם המערכת (חשבונית ירוקה/ריווחית/ERP...)", isRequired: true },
+            { type: "text", name: "B4_user", title: "שם משתמש", isRequired: true },
+            { type: "text", name: "B4_pass", title: "סיסמה / API Key", isRequired: true }
+          ]
+        },
+        {
+          name: "B5",
+          visibleIf: "{clientType} = 'B'",
+          title: "B5 – עובדים ושכר",
+          elements: [
+            { type: "boolean", name: "B5_has_employees", title: "האם יש עובדים?", isRequired: true },
+            {
+              type: "text",
+              name: "B5_employees_count",
+              title: "מספר עובדים (אם יש)",
+              visibleIf: "{B5_has_employees} = true",
+              inputType: "number"
+            },
+            {
+              type: "text",
+              name: "B5_payroll_system",
+              title: "מערכת שכר (אם קיימת)",
+              visibleIf: "{B5_has_employees} = true"
+            }
+          ]
+        },
+        {
+          name: "B6",
+          visibleIf: "{clientType} = 'B'",
+          title: "B6 – הרשאות ותשלומים",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "B6_payment_mode",
+              title: "איך תרצה/י לשלם?",
+              isRequired: true,
+              choices: [
+                { value: "debit_auth", text: "הרשאה לחיוב חשבון" },
+                { value: "standing_order", text: "הוראת קבע" }
+              ]
+            }
+          ]
+        },
+        {
+          name: "B7",
+          visibleIf: "{clientType} = 'B'",
+          title: "B7 – ייפוי כוח לרשויות",
+          elements: [
+            { type: "boolean", name: "B7_tax_poa", title: "מס הכנסה", isRequired: true },
+            { type: "boolean", name: "B7_vat_poa", title: "מע\"מ", isRequired: true },
+            { type: "boolean", name: "B7_btl_poa", title: "ביטוח לאומי", isRequired: true },
+            {
+              type: "boolean",
+              name: "B7_withholding_poa",
+              title: "תיק ניכויים (אם יש עובדים)",
+              visibleIf: "{B5_has_employees} = true"
+            }
+          ]
+        },
+        {
+          name: "B8",
+          visibleIf: "{clientType} = 'B'",
+          title: "B8 – מסמכים",
+          elements: [
+            {
+              type: "file",
+              name: "B8_id_doc",
+              title: "ת\"ז + ספח (PDF/JPG/PNG)",
+              isRequired: true,
+              acceptedTypes: ".pdf,.jpg,.jpeg,.png",
+              maxSize: 1024 * 1024 * 10,
+              storeDataAsText: true
+            }
+          ]
+        },
+        {
+          name: "B9",
+          visibleIf: "{clientType} = 'B'",
+          title: "B9 – סיכום וחתימה",
+          elements: [
+            {
+              type: "signaturepad",
+              name: "B9_signature",
+              title: "חתימה דיגיטלית",
+              isRequired: true,
+              signatureWidth: 500,
+              signatureHeight: 200
+            },
+            { type: "comment", name: "B9_notes", title: "הערות נוספות (לא חובה)" }
+          ]
+        },
+
+        /* ===================== מסלול C – חברה בע\"מ קיימת ===================== */
+
+        {
+          name: "C_EXIST_1",
+          visibleIf: "{clientType} = 'C' and {companyCSubtype} = 'C_EXIST'",
+          title: "C1..C8 – פרטי חברה קיימת",
+          elements: [
+            { type: "text", name: "C1_contact_name", title: "C1 – שם מלא של מבצע התהליך", isRequired: true },
+            { type: "text", name: "C1_contact_role", title: "תפקיד בחברה", isRequired: true },
+            { type: "text", name: "C2_company_name", title: "C2 – שם החברה (כמו ברשם החברות)", isRequired: true },
+            { type: "text", name: "C2_company_reg", title: "מספר ח.פ. (9 ספרות)", isRequired: true, inputType: "number" },
+            { type: "text", name: "C2_company_address", title: "כתובת רשומה", isRequired: true },
+            { type: "text", name: "C2_company_oper_address", title: "כתובת פעילות בפועל (אם שונה)" },
+            { type: "text", name: "C2_year", title: "שנת התאגדות", inputType: "number", isRequired: true },
+            { type: "text", name: "C2_activity", title: "תחום פעילות", isRequired: true },
+
+            {
+              type: "panel",
+              name: "C3_shareholders_panel",
+              title: "C3 – בעלי מניות",
+              elements: [
+                { type: "text", name: "C3_count", title: "כמה בעלי מניות?", inputType: "number", isRequired: true },
+                {
+                  type: "comment",
+                  name: "C3_details",
+                  title: "פרטי בעלי המניות (ישראל/תושב חוץ; UBO; בעל שליטה)"
+                }
+              ]
+            },
+
+            {
+              type: "file",
+              name: "C4_shareholder_docs",
+              title: "C4 – מסמכי בעלי מניות (PDF/JPG/PNG)",
+              isRequired: true,
+              acceptedTypes: ".pdf,.jpg,.jpeg,.png",
+              storeDataAsText: true
+            },
+
+            {
+              type: "panel",
+              name: "C5_fin",
+              title: "C5 – נתונים פיננסיים",
+              elements: [
+                {
+                  type: "text",
+                  name: "C5_turnover_last3",
+                  title: "מחזור שנתי ממוצע 3 שנים אחרונות (₪)",
+                  inputType: "number"
+                },
+                {
+                  type: "text",
+                  name: "C5_turnover_expected",
+                  title: "צפי מחזור לשנה הקרובה (₪)",
+                  inputType: "number"
+                },
+                { type: "text", name: "C5_employees", title: "מספר עובדים", inputType: "number", isRequired: true },
+                {
+                  type: "radiogroup",
+                  name: "C5_bookkeeping_type",
+                  title: "סוג הנה\"ח",
+                  choices: ["כפולה", "חד צדית", "לא ידוע"],
+                  isRequired: true
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C6_bank",
+              title: "C6 – חשבון בנק",
+              elements: [
+                {
+                  type: "radiogroup",
+                  name: "C6_bank_exists",
+                  title: "יש חשבון בנק פעיל על שם החברה?",
+                  choices: ["כן", "לא"],
+                  isRequired: true
+                },
+                {
+                  type: "text",
+                  name: "C6_bank_name",
+                  title: "שם הבנק",
+                  visibleIf: "{C6_bank_exists} = 'כן'"
+                },
+                {
+                  type: "text",
+                  name: "C6_bank_branch",
+                  title: "סניף",
+                  inputType: "number",
+                  visibleIf: "{C6_bank_exists} = 'כן'"
+                },
+                {
+                  type: "text",
+                  name: "C6_bank_account",
+                  title: "מספר חשבון",
+                  inputType: "number",
+                  visibleIf: "{C6_bank_exists} = 'כן'"
+                },
+                {
+                  type: "file",
+                  name: "C6_bank_letter",
+                  title: "אישור ניהול חשבון (לא חובה)",
+                  visibleIf: "{C6_bank_exists} = 'כן'",
+                  acceptedTypes: ".pdf,.jpg,.jpeg,.png",
+                  storeDataAsText: true
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C7_erp",
+              title: "C7 – מערכת הנה\"ח/חשבוניות",
+              elements: [
+                {
+                  type: "radiogroup",
+                  name: "C7_has_system",
+                  title: "האם יש מערכת פעילה?",
+                  choices: ["כן", "לא"],
+                  isRequired: true
+                },
+                {
+                  type: "text",
+                  name: "C7_system_name",
+                  title: "שם מערכת",
+                  visibleIf: "{C7_has_system} = 'כן'"
+                },
+                {
+                  type: "text",
+                  name: "C7_system_user",
+                  title: "שם משתמש",
+                  visibleIf: "{C7_has_system} = 'כן'"
+                },
+                {
+                  type: "text",
+                  name: "C7_system_pass",
+                  title: "סיסמה / API Key",
+                  visibleIf: "{C7_has_system} = 'כן'"
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C8_payroll",
+              title: "C8 – עובדים ושכר",
+              elements: [
+                { type: "boolean", name: "C8_has_employees", title: "יש עובדים?" },
+                {
+                  type: "text",
+                  name: "C8_employees_count",
+                  title: "מספר עובדים",
+                  inputType: "number",
+                  visibleIf: "{C8_has_employees} = true"
+                },
+                {
+                  type: "text",
+                  name: "C8_payroll_system",
+                  title: "מערכת שכר (אם קיימת)",
+                  visibleIf: "{C8_has_employees} = true"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          name: "C_EXIST_2",
+          visibleIf: "{clientType} = 'C' and {companyCSubtype} = 'C_EXIST'",
+          title: "C17..C21 – הסכם, חתימה, פניה לרו\"ח קודם, סיכום",
+          elements: [
+            {
+              type: "html",
+              name: "C17_agreement_intro",
+              html: "<div><b>C17 – הסכם התקשרות:</b> לאחר קריאת ההסכם, אנא חתום/י מטה.</div>"
+            },
+            {
+              type: "signaturepad",
+              name: "C18_signature",
+              title: "C18 – חתימה דיגיטלית על ההסכם",
+              isRequired: true,
+              signatureWidth: 500,
+              signatureHeight: 200
+            },
+            {
+              type: "panel",
+              name: "C19_prev",
+              title: "C19 – פניה לרו\"ח קודם",
+              elements: [
+                {
+                  type: "radiogroup",
+                  name: "C19_mode",
+                  title: "כיצד לבצע פניה?",
+                  isRequired: true,
+                  choices: [
+                    { value: "auto", text: "המשרד יפנה בשמי לרו\"ח הקודם" },
+                    { value: "manual", text: "שלחו לי נוסח מייל ואני אעביר" }
+                  ]
+                },
+                {
+                  type: "text",
+                  name: "C19_prevCPA_name",
+                  title: "שם הרו\"ח/המשרד הקודם",
+                  visibleIf: "{C19_mode} = 'auto'"
+                },
+                {
+                  type: "text",
+                  name: "C19_prevCPA_email",
+                  title: "דוא\"ל הרו\"ח/המשרד הקודם",
+                  inputType: "email",
+                  visibleIf: "{C19_mode} = 'auto'"
+                },
+                {
+                  type: "boolean",
+                  name: "C19_cc_client",
+                  title: "לצרף אותי כ-CC?",
+                  visibleIf: "{C19_mode} = 'auto'"
+                }
+              ]
+            },
+            {
+              type: "comment",
+              name: "C20_missing",
+              title: "C20 – מסמכים חסרים / הערות"
+            }
+          ]
+        },
+
+        /* ===================== מסלול C – חברה בע\"מ חדשה ===================== */
+
+        {
+          name: "C_NEW_1",
+          visibleIf: "{clientType} = 'C' and {companyCSubtype} = 'C_NEW'",
+          title: "C9..C16 – הקמת חברה חדשה",
+          elements: [
+            { type: "text", name: "C9_fullname", title: "C9 – שם מלא של יוזם/ת ההקמה", isRequired: true },
+            {
+              type: "radiogroup",
+              name: "C9_role",
+              title: "תפקיד בהקמה",
+              isRequired: true,
+              choices: ["מייסד/ת ובעלים","מייצג/ת מטעם המייסד","אחר"]
+            },
+            {
+              type: "comment",
+              name: "C9_role_other",
+              title: "פירוט (אם 'אחר')",
+              visibleIf: "{C9_role} = 'אחר'"
+            },
+
+            {
+              type: "panel",
+              name: "C10_names",
+              title: "C10 – שמות מוצעים + תחום + תחילת פעילות",
+              elements: [
+                {
+                  type: "comment",
+                  name: "C10_he_names",
+                  title: "שמות מוצעים בעברית (3 לפי סדר עדיפות)",
+                  isRequired: true
+                },
+                { type: "text", name: "C10_en_name", title: "שם מוצע באנגלית", isRequired: true },
+                { type: "text", name: "C10_activity", title: "תחום העיסוק המרכזי", isRequired: true },
+                {
+                  type: "text",
+                  name: "C10_start_date",
+                  title: "תאריך תחילת פעילות (משוער)",
+                  inputType: "date",
+                  isRequired: true
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C11_shareholders",
+              title: "C11 – בעלי מניות",
+              elements: [
+                {
+                  type: "text",
+                  name: "C11_count",
+                  title: "כמה בעלי מניות יהיו?",
+                  inputType: "number",
+                  isRequired: true
+                },
+                {
+                  type: "comment",
+                  name: "C11_details",
+                  title: "פרטי בעלי המניות"
+                },
+                {
+                  type: "file",
+                  name: "C11_docs",
+                  title: "מסמכי זיהוי בעלי מניות (PDF/JPG/PNG)",
+                  acceptedTypes: ".pdf,.jpg,.jpeg,.png",
+                  storeDataAsText: true
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C12_directors",
+              title: "C12 – דירקטורים + מורשי חתימה",
+              elements: [
+                {
+                  type: "text",
+                  name: "C12_dir_count",
+                  title: "מספר דירקטורים",
+                  inputType: "number",
+                  isRequired: true
+                },
+                {
+                  type: "comment",
+                  name: "C12_signatories",
+                  title: "מי יהיו מורשי חתימה?"
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C13_fin",
+              title: "C13 – נתונים פיננסיים",
+              elements: [
+                {
+                  type: "text",
+                  name: "C13_turnover_expected",
+                  title: "צפי מחזור בשנה הראשונה (₪)",
+                  inputType: "number",
+                  isRequired: true
+                },
+                {
+                  type: "boolean",
+                  name: "C13_intl_trade",
+                  title: "צפוי מסחר בינלאומי (ייבוא/ייצוא)?"
+                },
+                {
+                  type: "comment",
+                  name: "C13_intl_details",
+                  title: "באילו מדינות ובאיזה אופן?",
+                  visibleIf: "{C13_intl_trade} = true"
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C14_bank",
+              title: "C14 – חשבון בנק",
+              elements: [
+                {
+                  type: "radiogroup",
+                  name: "C14_bank_mode",
+                  title: "סטטוס חשבון בנק",
+                  isRequired: true,
+                  choices: ["קיים","נרצה לפתוח עם ליווי המשרד","נפתח עצמאית"]
+                },
+                {
+                  type: "text",
+                  name: "C14_bank_name",
+                  title: "שם הבנק",
+                  visibleIf: "{C14_bank_mode} = 'קיים'"
+                },
+                {
+                  type: "text",
+                  name: "C14_bank_branch",
+                  title: "סניף",
+                  inputType: "number",
+                  visibleIf: "{C14_bank_mode} = 'קיים'"
+                },
+                {
+                  type: "text",
+                  name: "C14_bank_account",
+                  title: "מספר חשבון",
+                  inputType: "number",
+                  visibleIf: "{C14_bank_mode} = 'קיים'"
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C15_erp",
+              title: "C15 – הנה\"ח/חשבוניות",
+              elements: [
+                {
+                  type: "radiogroup",
+                  name: "C15_who_handles",
+                  title: "מי יטפל בהנה\"ח?",
+                  isRequired: true,
+                  choices: ["המשרד","גורם אחר","טרם החלטנו"]
+                },
+                {
+                  type: "text",
+                  name: "C15_system_name",
+                  title: "שם מערכת (אם מתוכננת)",
+                  visibleIf: "{C15_who_handles} != 'טרם החלטנו'"
+                },
+                {
+                  type: "text",
+                  name: "C15_user",
+                  title: "שם משתמש",
+                  visibleIf: "{C15_system_name} notempty"
+                },
+                {
+                  type: "text",
+                  name: "C15_pass",
+                  title: "סיסמה / API Key",
+                  visibleIf: "{C15_system_name} notempty"
+                }
+              ]
+            },
+
+            {
+              type: "panel",
+              name: "C16_payroll",
+              title: "C16 – עובדים ושכר (אם צפויים)",
+              elements: [
+                {
+                  type: "boolean",
+                  name: "C16_has_employees",
+                  title: "צפויים עובדים?"
+                },
+                {
+                  type: "text",
+                  name: "C16_employees_count",
+                  title: "מספר עובדים צפוי",
+                  inputType: "number",
+                  visibleIf: "{C16_has_employees} = true"
+                },
+                {
+                  type: "text",
+                  name: "C16_payroll_system",
+                  title: "מערכת שכר (אם מתוכננת)",
+                  visibleIf: "{C16_has_employees} = true"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          name: "C_NEW_2",
+          visibleIf: "{clientType} = 'C' and {companyCSubtype} = 'C_NEW'",
+          title: "C17..C21 – הסכם, חתימה, השלמות, סיכום",
+          elements: [
+            {
+              type: "html",
+              name: "C17_agreement_intro2",
+              html: "<div><b>C17 – הסכם התקשרות:</b> לאחר קריאת ההסכם, אנא חתום/י מטה.</div>"
+            },
+            {
+              type: "signaturepad",
+              name: "C18_signature2",
+              title: "C18 – חתימה דיגיטלית על ההסכם",
+              isRequired: true,
+              signatureWidth: 500,
+              signatureHeight: 200
+            },
+            {
+              type: "comment",
+              name: "C20_missing2",
+              title: "C20 – מסמכים חסרים / הבהרות"
+            }
+          ]
+        }
+
+      ]
+    };
+
+    var survey = new Survey.Model(json);
+
+    // שליחה למייל שלך באמצעות FormSubmit
+    survey.onComplete.add(async function(sender) {
+      var data = sender.data || {};
+      var rows = Object.keys(data).map(function(key) {
+        var val = data[key];
+        if (typeof val === "object") { val = JSON.stringify(val); }
+        return "<tr><td style='padding:6px 10px;border:1px solid #eee;'><b>" +
+               key + "</b></td><td style='padding:6px 10px;border:1px solid #eee;'>" +
+               (val || "") + "</td></tr>";
+      }).join("");
+
+      var htmlBody =
+        "<h3>New onboarding submission – COHEN &amp; PARTNERS</h3>" +
+        "<p>Automatic notification from the online onboarding form.</p>" +
+        "<table style='border-collapse:collapse;font-size:13px;'>" +
+        rows + "</table>";
+
+      try {
+        await fetch("https://formsubmit.co/ajax/ido@isc-finance.co", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            _subject: "New Onboarding – COHEN & PARTNERS",
+            message: htmlBody
+          })
+        });
+      } catch(e) {
+        console.warn("Email send failed:", e);
+      }
+
+      document.getElementById("surveyResult").innerHTML =
+        "עותק טכני של הנתונים (לשימוש פנימי, אפשר להסיר מהקוד במידת הצורך):\n" +
+        JSON.stringify(data, null, 2);
+    });
+
+    $(function() {
+      $("#surveyElement").Survey({ model: survey });
+    });
+  </script>
 </body>
 </html>
